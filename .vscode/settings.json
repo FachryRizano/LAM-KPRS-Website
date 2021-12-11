@@ -1,4 +1,6 @@
 {
     "workbench.colorTheme": "Solarized Light",
-    "workbench.iconTheme": "vscode-icons"
+    "workbench.iconTheme": "vscode-icons",
+    "python.terminal.activateEnvironment":true,
+    "python.defaultInterpreterPath": "C://Users//HP//OneDrive - Bina Nusantara University//Desktop//LAM-KPRS-Website//env//Scripts//python.exe",
 }
