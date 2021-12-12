@@ -1,0 +1,11 @@
+{%include 'main.html'%}
+{% block content%}
+    <div>
+        <h1>Create Event</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Create Event">
+        </form>
+    </div>
+{% endblock content%}

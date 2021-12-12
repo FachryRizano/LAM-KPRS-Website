@@ -1,0 +1,13 @@
+{%include 'main.html'%}
+{% block content %}
+    <h1>Event Lit</h1>
+    <a href="{%url 'create-event'%}" class="btn btn-info" role="button">Create Event</a>
+
+    <div>
+        {%for event in events%}
+            <div>
+                <h5>{{event.id}} -- {{event.nama}}</h5>
+            </div>
+        {%endfor%}
+    </div>
+{% endblock content%}
