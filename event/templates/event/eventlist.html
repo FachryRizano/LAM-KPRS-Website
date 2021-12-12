@@ -6,7 +6,11 @@
     <div>
         {%for event in events%}
             <div>
-                <h5>{{event.id}} -- {{event.nama}}</h5>
+                <h5>
+                    <a href="/event/{{event.id}}" >
+                        {{event.nama}}
+                    </a>
+                </h5>
             </div>
         {%endfor%}
     </div>

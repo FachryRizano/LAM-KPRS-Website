@@ -13,7 +13,12 @@ def createEvent(request):
     context = {'form':form}
     return render(request,'event/create-event.html',context)
 
-def viewEvent(request):
+def viewEvent(request,pk):
+    event = Event.objects.get(id=pk)
+    context = {'event':event}
+    return render(request,'event/event.html',context)
+
+def viewAllEvent(request):
     events = Event.objects.all()
     context = {'events':events}
     return render(request,'event/eventlist.html',context)
