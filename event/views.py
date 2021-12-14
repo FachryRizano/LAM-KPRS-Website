@@ -23,5 +23,14 @@ def viewAllEvent(request):
     context = {'events':events}
     return render(request,'event/eventlist.html',context)
 
-# def updateEvent(request,pk):
-#     return render(request,)
+def updateEvent(request,pk):
+    event = Event.objects.get(id=pk)
+    form = EventForm(instance=event)
+
+    if request.method == 'POST':
+        form = EventForm(request.POST,instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('eventlist')
+    context = {'form':form}
+    return render(request,'event/create-event.html',context)

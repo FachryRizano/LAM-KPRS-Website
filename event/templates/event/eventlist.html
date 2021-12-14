@@ -2,14 +2,13 @@
 {% block content %}
     <h1>Event Lit</h1>
     <a href="{%url 'create-event'%}" class="btn btn-info" role="button">Create Event</a>
-
     <div>
         {%for event in events%}
             <div>
                 <h5>
-                    <a href="/event/{{event.id}}" >
-                        {{event.nama}}
-                    </a>
+                    <a href="/event/{{event.id}}" >{{event.nama}}</a>
+                    <a href="{% url 'update-event' event.id %}">Edit</a>
+                    <a href="{% url 'update-event' event.id %}">Delete</a>
                 </h5>
             </div>
         {%endfor%}
