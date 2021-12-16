@@ -19,3 +19,8 @@ class Event(models.Model):
     def __str__(self):
         return self.nama
 
+class Topics(models.Model):
+    nama = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nama

@@ -34,3 +34,10 @@ def updateEvent(request,pk):
             return redirect('eventlist')
     context = {'form':form}
     return render(request,'event/create-event.html',context)
+
+def deleteEvent(request,pk):
+    event = Event.objects.get(id=pk)
+    if request.method =='POST':
+        event.delete()
+        return redirect('eventlist')
+    return render(request,'event/delete.html',{'obj':event})

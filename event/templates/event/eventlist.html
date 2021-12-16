@@ -1,16 +1,33 @@
 {%include 'main.html'%}
 {% block content %}
-    <h1>Event Lit</h1>
-    <a href="{%url 'create-event'%}" class="btn btn-info" role="button">Create Event</a>
+<style>
+    .home-container{
+        display:grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+<div class="home-container">
     <div>
-        {%for event in events%}
-            <div>
-                <h5>
-                    <a href="/event/{{event.id}}" >{{event.nama}}</a>
-                    <a href="{% url 'update-event' event.id %}">Edit</a>
-                    <a href="{% url 'update-event' event.id %}">Delete</a>
-                </h5>
-            </div>
-        {%endfor%}
+        <h3>Browse Topics</h3>
+        <hr>
     </div>
+
+    <div>
+        <h1>Event Lit</h1>
+        <a href="{%url 'create-event'%}" class="btn btn-info" role="button">Create Event</a>
+        <div>
+            {%for event in events%}
+                <div>
+                    <h5>
+                        <a href="/event/{{event.id}}" >{{event.nama}}</a>
+                        <a href="{% url 'update-event' event.id %}">Edit</a>
+                        <a href="{% url 'delete-event' event.id %}">Delete</a>
+                    </h5>
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+
+    
+</div>
 {% endblock content%}
