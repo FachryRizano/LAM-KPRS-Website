@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Event
+from .models import Event,Topic
 from .event_form import EventForm
 
 # Create your views here.
@@ -19,8 +19,10 @@ def viewEvent(request,pk):
     return render(request,'event/event.html',context)
 
 def viewAllEvent(request):
-    events = Event.objects.all()
-    context = {'events':events}
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    events = Event.objects.filter(topic__name__icontains=q)
+    topics = Topic.objects.all()
+    context = {'events':events,'topics':topics}
     return render(request,'event/eventlist.html',context)
 
 def updateEvent(request,pk):

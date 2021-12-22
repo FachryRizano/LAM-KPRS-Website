@@ -2,10 +2,10 @@ from django.db import models
 from user.models import User
 
 class Topic(models.Model):
-    nama = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.nama
+        return self.name
 
 # Create your models here.
 class Event(models.Model):
