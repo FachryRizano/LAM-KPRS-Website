@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from django.shortcuts import render
+from . import views
 
-def home(request):
-    return render(request,'home.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',home,name='home'),
-    path('',include('user.urls')),
+    path('',views.home,name='home'),
+    path('login/',views.loginUser,name='login'),
+    path('logout/',views.logoutUser,name='logout'),
+    path('register/',views.register,name='register'),
     path('event/',include('event.urls'))
 ]

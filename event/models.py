@@ -1,6 +1,5 @@
 from django.db import models
-from user.models import User
-
+from django.contrib.auth.models import User
 class Topic(models.Model):
     name = models.CharField(max_length=200)
 
@@ -9,7 +8,7 @@ class Topic(models.Model):
 
 # Create your models here.
 class Event(models.Model):
-    nama = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     topic = models.ForeignKey(Topic,on_delete=models.SET_NULL,null=True)
     # tanggal = models.DateTimeField()
     # tempat = models.CharField(max_length=100)
