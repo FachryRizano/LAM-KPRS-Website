@@ -27,7 +27,7 @@ def loginUser(request):
     context = {}
     return render(request,'login.html',context)
 
-@login_required(login_required='/login')
+@login_required(login_url='/login')
 def logoutUser(request):
     logout(request)
     return redirect('home')
