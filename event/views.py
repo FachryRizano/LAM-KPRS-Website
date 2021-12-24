@@ -4,6 +4,7 @@ from .models import Event,Topic
 from django.db.models import Q
 from .event_form import EventForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 # Create your views here.
 
 @login_required(login_url='login')
@@ -36,6 +37,8 @@ def viewAllEvent(request):
 def updateEvent(request,pk):
     event = Event.objects.get(id=pk)
     form = EventForm(instance=event)
+    if request.user != event.hosted_by:
+        return HttpResponse("You aren't allowed here!")
 
     if request.method == 'POST':
         form = EventForm(request.POST,instance=event)
@@ -48,6 +51,9 @@ def updateEvent(request,pk):
 @login_required(login_url='login')
 def deleteEvent(request,pk):
     event = Event.objects.get(id=pk)
+    if request.user != event.hosted_by:
+        return HttpResponse("You aren't allowed here!")
+
     if request.method =='POST':
         event.delete()
         return redirect('eventlist')

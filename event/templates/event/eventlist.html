@@ -30,6 +30,7 @@
                 <div>
                     <h5>
                         <a href="/event/{{event.id}}" >{{event.nama}}</a>
+                        {% iff request.user == room.hosted_by%}
                         <a href="{% url 'update-event' event.id %}">Edit</a>
                         <a href="{% url 'delete-event' event.id %}">Delete</a>
                     </h5>
