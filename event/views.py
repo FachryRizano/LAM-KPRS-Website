@@ -21,7 +21,7 @@ def createEvent(request):
 @login_required(login_url='login')
 def viewEvent(request,pk):
     event = Event.objects.get(id=pk)
-    room_messages = event.message_set.all().order_by('-created')
+    room_messages = event.message_set.all()
     participants = event.participants.all()
     if request.method == 'POST':
         message = Message.objects.create(
@@ -40,8 +40,9 @@ def viewAllEvent(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     events = Event.objects.filter(Q(topic__name__icontains=q) | Q(name__icontains=q)|Q(hosted_by__username__icontains=q))
     topics = Topic.objects.all()
-    context = {'events':events,'topics':topics}
-    return render(request,'event/eventlist.html',context)
+    messages = Message.objects.filter(Q(event__name__icontains=q)|Q(event__topic__name__icontains=q)|Q(user__username__icontains=q))
+    context = {'events':events,'topics':topics, 'recent_messages':messages}
+    return render(request,'event/main.html',context)
 
 @login_required(login_url='login')
 def updateEvent(request,pk):
