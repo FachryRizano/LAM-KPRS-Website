@@ -1,4 +1,4 @@
-{%include 'main.html'%}
+{%extends 'main.html'%}
 {% block content %}
 <style>
     .home-container{
@@ -12,15 +12,15 @@
     </div>
 
     <div>
-        <h1>Event Lit</h1>
+        <h1>Event List</h1>
         <a href="{%url 'create-event'%}" class="btn btn-info" role="button">Create Event</a>
         <div>
-            {% include 'event/activity_component.html' %}
+            {% include 'event/feed_component.html' %}
         </div>
     </div>
 
     <div>
-        {% include 'event/event_component.html' %}
+        {% include 'event/activity_component.html' %}
     </div>
 
     

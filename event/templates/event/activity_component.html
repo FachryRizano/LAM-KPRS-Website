@@ -1,13 +1,11 @@
-<h5>{{event_count}} available</h5>
-{%for event in events%}
-    <div>
-        <h5>
-            <a href="/event/{{event.id}}" >{{event.name}}</a>
-            {% if request.user == room.hosted_by%}
-            <a href="{% url 'update-event' event.id %}">Edit</a>
-            <a href="{% url 'delete-event' event.id %}">Delete</a>
-            {%endif%}
-        </h5>
-        <h3>{{event.topic}}</h3>
-    </div>
+<h3>Recent Activity</h3>
+<hr>
+{%for message in recent_messages%}
+<div>
+    <small><a href="{%url 'profile-page' message.user.id %}">{{message.user}}</a> Reply to "{{message.event.name}}" since {{message.updated|timesince}}</small>
+    {%if request.user == message.user%}
+    <a href="{% url 'delete-message' message.id %}">Delete</a>
+    {%endif%}
+    <p>{{message.body}}</p>
+</div>
 {%endfor%}

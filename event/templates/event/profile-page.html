@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{%block content%}
+<style>
+    .profile-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+<div class="profile-container">
+    <div>
+        {%include 'event/topic_component.html'%}
+    </div>
+    
+    <div>
+        <p>This is {{user.username}} speaking</p>
+        {%include 'event/feed_component.html'%}
+    </div>
+    
+    <div>
+        {%include 'event/activity_component.html'%}
+    </div>
+</div>
+{%endblock content%}

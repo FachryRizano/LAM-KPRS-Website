@@ -1,0 +1,16 @@
+<h5>{{event_count}} available</h5>
+{%for event in events%}
+    <div>
+        <h5>
+            <a href="{%url 'profile-page' event.hosted_by.id %}">@{{event.hosted_by.username}}</a>
+            <div>
+                <a href="/event/{{event.id}}" >{{event.name}}</a>
+                {% if request.user == room.hosted_by%}
+                <a href="{% url 'update-event' event.id %}">Edit</a>
+                <a href="{% url 'delete-event' event.id %}">Delete</a>
+                {%endif%}
+            </div>
+        </h5>
+        <hr>
+    </div>
+{%endfor%}
