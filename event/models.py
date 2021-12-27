@@ -15,7 +15,7 @@ class Event(models.Model):
     no_rek = models.IntegerField(default=0)
     tanggal = models.DateTimeField()
     tempat = models.CharField(max_length=100)
-    hosted_by = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    hosted_by = models.CharField(max_length=100)
     participants = models.ManyToManyField(User,related_name='participants',blank=True)
     organized_by = models.CharField(max_length=100)
     event_website = models.CharField(max_length=200) 
@@ -42,5 +42,8 @@ class Message(models.Model):
 
     class Meta:
         ordering = ['-updated','created']
+
+class Order(models.Model):
+    pass
 
 

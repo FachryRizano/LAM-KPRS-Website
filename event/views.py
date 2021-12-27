@@ -42,7 +42,7 @@ def viewEvent(request,pk):
 @login_required(login_url='login')
 def viewAllEvent(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    events = Event.objects.filter(Q(topic__name__icontains=q) | Q(name__icontains=q)|Q(hosted_by__email__icontains=q))
+    events = Event.objects.filter(Q(topic__name__icontains=q) | Q(name__icontains=q)|Q(hosted_by__icontains=q))
     topics = Topic.objects.all()
     event_count = events.count()
     messages = Message.objects.filter(Q(event__name__icontains=q)|Q(event__topic__name__icontains=q)|Q(user__email__icontains=q))
@@ -90,6 +90,7 @@ def deleteEvent(request,pk):
         event.delete()
         return redirect('eventlist')
     return render(request,'event/delete.html',{'obj':event})
+
 
 @login_required(login_url='login')
 def deleteMessage(request,pk):

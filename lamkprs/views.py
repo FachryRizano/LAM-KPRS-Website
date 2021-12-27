@@ -38,6 +38,14 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
+@login_required(login_url='/login')
+def orderEvent(request):
+    user = User.objects.get(id=request.user.id)
+    order = user.event_set.all()
+    context = {'order':order}
+    return render(request,'order-list.html',context)
+
+
 
 
 def register(request):

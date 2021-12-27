@@ -9,5 +9,5 @@ urlpatterns = [
     path('update-event/<str:pk>/',views.updateEvent,name='update-event'),
     path('delete-event/<str:pk>/',views.deleteEvent,name='delete-event'),
     path('delete-message/<str:pk>/',views.deleteMessage,name='delete-message'),
-    path('profile-page/<str:pk>/',views.viewProfile,name='profile-page')
+    path('profile-page/<str:pk>/',views.viewProfile,name='profile-page'),
 ]

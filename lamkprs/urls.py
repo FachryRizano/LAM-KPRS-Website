@@ -24,5 +24,6 @@ urlpatterns = [
     path('login/',views.loginUser,name='login'),
     path('logout/',views.logoutUser,name='logout'),
     path('register/',views.register,name='register'),
-    path('event/',include('event.urls'))
+    path('event/',include('event.urls')),
+    path('order/',views.orderEvent,name='event-order')
 ]
