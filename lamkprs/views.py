@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import logout,login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth.models import User
+from users.models import User
 from lamkprs.form import UserForm
 from django.contrib.auth import authenticate, login, logout
 
@@ -16,11 +16,11 @@ def loginUser(request):
         return redirect('home')
 
     if request.method =="POST":
-        username = request.POST.get('username').lower()
+        email = request.POST.get('email')
         password = request.POST.get('password')
         try:
-            user = User.objects.get(username=username)
-            user = authenticate(request,username=username,password=password)
+            user = User.objects.get(email=email)
+            user = authenticate(request,email=email,password=password)
             if user is not None:
                 login(request,user)
                 return redirect('home')
@@ -41,6 +41,8 @@ def logoutUser(request):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     form = UserForm()
     if request.method == "POST":
         form = UserForm(request.POST)

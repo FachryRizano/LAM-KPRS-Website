@@ -7,19 +7,11 @@ class EventForm(ModelForm):
     class Meta:
         model = Event
         fields = '__all__'
+        exclude = ['price','participants']
+
 
 class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['name','email','no_wa','password1','password2']
     
-    def clean(self):
-        cleaned_data = super(UserForm, self).clean()
-        password = cleaned_data.get("password1")
-        confirm_password = cleaned_data.get("password2")
-
-        if password != confirm_password:
-            raise forms.ValidationError(
-                "password and confirm_password does not match"
-            ) 
-        return cleaned_data

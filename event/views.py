@@ -10,14 +10,17 @@ from django.contrib.auth.models import User
 
 @login_required(login_url='login')
 def createEvent(request):
-    form = EventForm()
-    if request.method =="POST":
-        form = EventForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('eventlist')
-    context = {'form':form}
-    return render(request,'event/create-event.html',context)
+    if request.user.is_superuser:
+        form = EventForm()
+        if request.method =="POST":
+            form = EventForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('eventlist')
+        context = {'form':form}
+        return render(request,'event/create-event.html',context)
+    else:
+        return redirect('eventlist')
 
 @login_required(login_url='login')
 def viewEvent(request,pk):
@@ -39,10 +42,10 @@ def viewEvent(request,pk):
 @login_required(login_url='login')
 def viewAllEvent(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    events = Event.objects.filter(Q(topic__name__icontains=q) | Q(name__icontains=q)|Q(hosted_by__username__icontains=q))
+    events = Event.objects.filter(Q(topic__name__icontains=q) | Q(name__icontains=q)|Q(hosted_by__email__icontains=q))
     topics = Topic.objects.all()
     event_count = events.count()
-    messages = Message.objects.filter(Q(event__name__icontains=q)|Q(event__topic__name__icontains=q)|Q(user__username__icontains=q))
+    messages = Message.objects.filter(Q(event__name__icontains=q)|Q(event__topic__name__icontains=q)|Q(user__email__icontains=q))
     context = {'events':events,'topics':topics, 'recent_messages':messages,'event_count':event_count}
     return render(request,'event/main.html',context)
 

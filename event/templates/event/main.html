@@ -13,7 +13,9 @@
 
     <div>
         <h1>Event List</h1>
+        {%if request.user.is_superuser%}
         <a href="{%url 'create-event'%}" class="btn btn-info" role="button">Create Event</a>
+        {%endif%}
         <div>
             {% include 'event/feed_component.html' %}
         </div>
