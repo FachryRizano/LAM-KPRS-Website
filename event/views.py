@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import render,redirect
 from .models import Event,Topic, Message
 from django.db.models import Q
-from .event_form import EventForm
+from lamkprs.form import EventForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User

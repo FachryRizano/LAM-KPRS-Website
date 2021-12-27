@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
+
 class Topic(models.Model):
     name = models.CharField(max_length=200)
 
@@ -10,17 +11,15 @@ class Topic(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=100)
     topic = models.ForeignKey(Topic,on_delete=models.SET_NULL,null=True)
-    # tanggal = models.DateTimeField()
-    # tempat = models.CharField(max_length=100)
+    tanggal = models.DateTimeField()
+    tempat = models.CharField(max_length=100)
     hosted_by = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     participants = models.ManyToManyField(User,related_name='participants',blank=True)
-    # organized_by = models.CharField(max_length=100)
-    # event_website = models.CharField(max_length=200) 
-    # flyer = models.CharField(max_length=200)
-    # peserta= 
-    harga = models.IntegerField()
-    # deskripsi = models.TextField()
-    # counter =
+    organized_by = models.CharField(max_length=100)
+    event_website = models.CharField(max_length=200) 
+    flyer = models.CharField(max_length=200)
+    price = models.IntegerField()
+    description = models.TextField(max_length=500, default="",editable=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -39,3 +38,5 @@ class Message(models.Model):
 
     class Meta:
         ordering = ['-updated','created']
+
+

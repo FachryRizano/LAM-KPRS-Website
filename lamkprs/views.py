@@ -4,7 +4,7 @@ from django.contrib.auth import logout,login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from lamkprs.form import UserForm
 from django.contrib.auth import authenticate, login, logout
 
 def home(request):
@@ -41,16 +41,15 @@ def logoutUser(request):
 
 
 def register(request):
-    form = UserCreationForm()
+    form = UserForm()
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username.lower()
             user.save()
             login(request,user)
             return redirect('home')
         else:
-            messages.error(request,'An error has been occured')
+            messages.error(request,form.errors)
     context = {'form':form}
     return render(request,'login_register.html',context)
