@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from .models import Event,Topic, Message
 from django.db.models import Q
 from lamkprs.form import EventForm
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -13,10 +14,12 @@ def createEvent(request):
     if request.user.is_superuser:
         form = EventForm()
         if request.method =="POST":
-            form = EventForm(request.POST)
+            form = EventForm(request.POST,request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect('eventlist')
+            else:
+                messages.error(request,form.errors)
         context = {'form':form}
         return render(request,'event/create-event.html',context)
     else:
@@ -42,10 +45,10 @@ def viewEvent(request,pk):
 @login_required(login_url='login')
 def viewAllEvent(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    events = Event.objects.filter(Q(topic__name__icontains=q) | Q(name__icontains=q)|Q(hosted_by__icontains=q))
-    topics = Topic.objects.all()
+    events = Event.objects.filter(Q(topic__icontains=q) |Q(name__icontains=q)|Q(hosted_by__icontains=q))
+    topics = list(events.values_list('topic',flat=True))
     event_count = events.count()
-    messages = Message.objects.filter(Q(event__name__icontains=q)|Q(event__topic__name__icontains=q)|Q(user__email__icontains=q))
+    messages = Message.objects.filter(Q(event__name__icontains=q)|Q(event__topic__icontains=q)|Q(user__email__icontains=q))
     context = {'events':events,'topics':topics, 'recent_messages':messages,'event_count':event_count}
     return render(request,'event/main.html',context)
 

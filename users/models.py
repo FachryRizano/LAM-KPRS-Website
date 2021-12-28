@@ -41,14 +41,14 @@ class User(AbstractUser):
     no_wa = PhoneNumberField(null=False,blank=False,unique=True)
     company = models.CharField(max_length=200,null=True)
     address = models.TextField(max_length=500,null=True)
-    password = models.CharField(max_length=50)
+    password = models.CharField(max_length=100)
     avatar = models.ImageField(null=True, default='')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.name
+        return self.email
 
 
 

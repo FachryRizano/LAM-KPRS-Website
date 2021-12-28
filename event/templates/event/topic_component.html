@@ -5,6 +5,6 @@
 </div>
 {% for topic in topics%}
 <div>
-    <a href="{%url 'eventlist' %}?q={{topic.name}}">{{topic.name}}</a>
+    <a href="{%url 'eventlist' %}">{{topic}}</a>
 </div>
 {%endfor%}

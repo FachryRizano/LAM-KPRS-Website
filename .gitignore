@@ -2,3 +2,5 @@ env/
 *.sqlite3
 __pycache__/
 *.pyc
+admin.txt
+sample_event

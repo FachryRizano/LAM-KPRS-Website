@@ -10,20 +10,21 @@ class Topic(models.Model):
 # Create your models here.
 class Event(models.Model):
     name = models.CharField(max_length=100)
-    topic = models.ForeignKey(Topic,on_delete=models.SET_NULL,null=True)
+    topic = models.CharField(null=True,max_length=100)
     code = models.CharField(max_length=100,default='')
-    no_rek = models.IntegerField(default=0)
-    tanggal = models.DateTimeField()
-    tempat = models.CharField(max_length=100)
-    hosted_by = models.CharField(max_length=100)
-    participants = models.ManyToManyField(User,related_name='participants',blank=True)
+    event_website = models.CharField(max_length=200,null=True,blank=True) 
+    no_rek = models.IntegerField(default=0,null=True,blank=True)
     organized_by = models.CharField(max_length=100)
-    event_website = models.CharField(max_length=200) 
-    event_pict= models.ImageField(null=True, default='')
-    logo_organization = models.ImageField(null=True, default='')
-    announcement = models.ImageField(null=True, default='')
-    price = models.IntegerField()
+    hosted_by = models.CharField(max_length=100)
+    start = models.DateTimeField(null=True)
+    end = models.DateTimeField(null=True)
+    tempat = models.CharField(max_length=100)
+    event_pict= models.ImageField(null=True, blank=True,upload_to='static/image/announcement')
+    logo_organization = models.ImageField(null=True, blank=True,upload_to='static/image/event_pic')
+    announcement = models.ImageField(null=True, blank=True,upload_to='static/image/logo_organization')
     description = models.TextField(max_length=500, default="",editable=True)
+    participants = models.ManyToManyField(User,related_name='participants',blank=True)
+    price = models.IntegerField(null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -42,8 +43,4 @@ class Message(models.Model):
 
     class Meta:
         ordering = ['-updated','created']
-
-class Order(models.Model):
-    pass
-
 

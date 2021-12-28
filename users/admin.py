@@ -6,10 +6,10 @@ from .models import CustomUserManager, User
 
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ('email', 'is_staff', 'is_active',)
+    list_display = ('email', 'is_staff', 'is_active','name')
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('email', 'password','name')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
     add_fieldsets = (
@@ -24,4 +24,4 @@ class CustomUserAdmin(UserAdmin):
     def __str__(self):
         return self.name
 
-admin.site.register(User)
+admin.site.register(User,CustomUserAdmin)
