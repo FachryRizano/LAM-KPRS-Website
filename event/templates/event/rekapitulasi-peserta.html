@@ -1,0 +1,42 @@
+{%load static%}
+{%block content%}
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <!--begin::Dropdown-->
+            <div class="dropdown dropdown-inline mr-2">
+                <a href="http://regsys.acaramedika.com/event/detail/the-4th-annual-scientific-meeting-of-indonesia-society-of-intensivists-anesthesiologist-inasia-2022" class="btn btn-light-primary font-weight-bolder">
+                <span class="svg-icon svg-icon-md">
+                    <i class="fas fa-arrow-circle-left"></i>&nbsp;
+                </span>Kembali</a>
+            </div>
+            <!--end::Dropdown-->
+        </div>
+        <div class="card-toolbar">
+            <span class="card-icon">
+                <a href="http://regsys.acaramedika.com/event/addparticipant?term=the-4th-annual-scientific-meeting-of-indonesia-society-of-intensivists-anesthesiologist-inasia-2022"><!--<i class="fas fa-plus-circle font-weight-bolder text-primary"></i>-->&nbsp; </a>
+            </span>
+            <a href="http://regsys.acaramedika.com/event/addparticipant?term=the-4th-annual-scientific-meeting-of-indonesia-society-of-intensivists-anesthesiologist-inasia-2022" class="fas fa-plus-circle btn btn-danger font-weight-bolder"> &nbsp; Tambah Peserta <strong><!--The 4th Annual Scientific Meeting of Indonesia Society of Intensivists Anesthesiologist (INASIA 2022)--></strong></a> 
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+    <div class="table-responsive">
+        <table class="table">    
+        </table><div id="dtTable_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dtTable_length"><label>Show <select name="dtTable_length" aria-controls="dtTable" class="custom-select custom-select-sm form-control form-control-sm browser-default"><option value="10">10</option><option value="30">30</option><option value="60">60</option><option value="-1">All</option></select></label></div></div><div class="col-sm-12 col-md-6"><div id="dtTable_filter" class="dataTables_filter"><label><input type="search" class="form-control form-control-sm" placeholder="Search records" aria-controls="dtTable"></label></div></div></div><div class="row"><div class="col-sm-12"><table class="table table-bordered table-hover table-checkable dataTable" id="dtTable" style="margin-top: 13px !important; width: 847px;" role="grid" aria-describedby="dtTable_info">
+            <thead>
+                <tr class="thead-light" role="row"><th width="10" valign="top" class="text-center sorting_disabled" style="vertical-align: middle; width: 20px;" rowspan="1" colspan="1">NO</th><th width="115" valign="top" class="text-center sorting_disabled" style="vertical-align: middle; width: 74px;" rowspan="1" colspan="1">TANGGAL DAFTAR</th><th width="250" valign="top" class="text-center sorting_disabled" style="vertical-align: middle; width: 101px;" rowspan="1" colspan="1">NAMA PESERTA</th><th width="75" valign="top" class="text-center sorting_disabled" style="vertical-align: middle; width: 59px;" rowspan="1" colspan="1">TIPE PESERTA</th><th width="300" valign="top" class="text-center sorting_disabled" style="vertical-align: middle; width: 129px;" rowspan="1" colspan="1">PARTISIPASI</th><th width="138" valign="top" class="text-center sorting_disabled" style="vertical-align: middle; width: 99px;" rowspan="1" colspan="1">STATUS PEMBAYARAN</th><th width="138" valign="top" class="text-center sorting_disabled" style="vertical-align: middle; width: 97px;" rowspan="1" colspan="1">KETERANGAN</th><th width="10" valign="top" class="text-center sorting_disabled" style="vertical-align: middle; width: 52px;" rowspan="1" colspan="1">INVOICE</th></tr>
+            </thead>                   
+            <tfoot>
+                <tr><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th></tr>
+            </tfoot>
+            <tbody>     
+            <tr class="odd"><td valign="top" colspan="8" class="dataTables_empty">No data available in table</td></tr></tbody>
+        </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dtTable_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dtTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dtTable_previous"><a href="#" aria-controls="dtTable" data-dt-idx="0" tabindex="0" class="page-link"><i class="ki ki-arrow-back"></i></a></li><li class="paginate_button page-item next disabled" id="dtTable_next"><a href="#" aria-controls="dtTable" data-dt-idx="1" tabindex="0" class="page-link"><i class="ki ki-arrow-next"></i></a></li></ul></div></div></div></div>
+    
+    </div>
+        
+        <!--end: Datatable-->
+    </div>
+</div>
+{%endblock content%}

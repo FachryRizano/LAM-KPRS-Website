@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.shortcuts import render,redirect
-from .models import Event,Topic, Message
+from .models import Event, Participant,Topic
 from django.db.models import Q
 from lamkprs.form import EventForm
 from django.contrib import messages
@@ -10,8 +10,12 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 @login_required(login_url='login')
+def participantRecapitulation(request,pk):
+    return render(request,'event/rekapitulasi-peserta.html')
+
+@login_required(login_url='login')
 def createEvent(request):
-    if request.user.is_superuser:
+    if request.user.is_staff:
         form = EventForm()
         if request.method =="POST":
             form = EventForm(request.POST,request.FILES)
@@ -28,18 +32,9 @@ def createEvent(request):
 @login_required(login_url='login')
 def viewEvent(request,pk):
     event = Event.objects.get(id=pk)
-    room_messages = event.message_set.all()
-    participants = event.participants.all()
     if request.method == 'POST':
-        message = Message.objects.create(
-            user = request.user,
-            event = event,
-            body = request.POST.get('body')
-        )
-        event.participants.add(request.user)
         return redirect('event', pk=event.id)
-        
-    context = {'event':event,'room_messages':room_messages,'participants':participants}
+    context = {'event':event}
     return render(request,'event/event.html',context)
 
 @login_required(login_url='login')
@@ -48,8 +43,7 @@ def viewAllEvent(request):
     events = Event.objects.filter(Q(topic__icontains=q) |Q(name__icontains=q)|Q(hosted_by__icontains=q))
     topics = list(events.values_list('topic',flat=True))
     event_count = events.count()
-    messages = Message.objects.filter(Q(event__name__icontains=q)|Q(event__topic__icontains=q)|Q(user__email__icontains=q))
-    context = {'events':events,'topics':topics, 'recent_messages':messages,'event_count':event_count}
+    context = {'events':events,'topics':topics,'event_count':event_count}
     return render(request,'event/main.html',context)
 
 @login_required(login_url='login')
@@ -82,6 +76,9 @@ def viewProfile(request,pk):
         'event_count':event_count
     }
     return render(request,'event/profile-page.html',context)
+
+
+        
 
 @login_required(login_url='login')
 def deleteEvent(request,pk):

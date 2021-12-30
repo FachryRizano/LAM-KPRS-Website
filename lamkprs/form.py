@@ -7,7 +7,7 @@ class EventForm(ModelForm):
     class Meta:
         model = Event
         fields = '__all__'
-        exclude = ['price','participants']
+        exclude = ['price','participants','status','free_event']
         widgets = {
             'start': forms.DateInput(
                 format=('%Y-%m-%d'),

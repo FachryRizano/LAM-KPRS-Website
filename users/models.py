@@ -42,6 +42,7 @@ class User(AbstractUser):
     company = models.CharField(max_length=200,null=True)
     address = models.TextField(max_length=500,null=True)
     password = models.CharField(max_length=100)
+    registration = models.CharField(max_length=100,null=True,blank=True)
     avatar = models.ImageField(null=True, default='')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

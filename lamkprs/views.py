@@ -7,6 +7,7 @@ from users.models import User
 from lamkprs.form import UserForm
 from django.contrib.auth import authenticate, login, logout
 from event.models import Event
+from event.models import Participant
 
 def home(request):
     return render(request,'home.html')
@@ -39,14 +40,26 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
+
 @login_required(login_url='/login')
-def orderEvent(request):
-    user = User.objects.get(id=request.user.id)
-    order = Event.objects.filter(participants=user)
-    context = {'order':order}
+def viewOrder(request):
+    # events = request.user.paricipants.all()
+    participants = Participant.objects.filter(user=request.user)
+    context = {'participants':participants}
     return render(request,'order-list.html',context)
 
-
+@login_required(login_url='login')
+def orderEvent(request,pk):
+    event = Event.objects.filter(id=pk)
+    participant = Participant.objects.filter(event=event,user=request.user)
+    if len(participant)==0:
+        Participant.objects.create(
+            user = request.user,
+            event = event
+        )
+    else:
+        messages.error(request,'Sudah mendaftar acara ini')
+    return redirect('eventlist')
 
 
 def register(request):
