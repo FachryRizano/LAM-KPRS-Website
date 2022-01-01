@@ -24,7 +24,7 @@ class Event(models.Model):
     logo_organization = models.ImageField(null=True, blank=True,upload_to='logo_organization/')
     announcement = models.ImageField(null=True, blank=True,upload_to='announcement/')
     description = models.TextField(max_length=500, default="",editable=True,blank=True,null=True)
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(default=True)
     free_event = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -46,6 +46,7 @@ class CPD(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
 class ParticipantType(models.Model):
+    event = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     category_name = models.CharField(max_length=200)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -61,6 +62,10 @@ class Participant(models.Model):
     paid = models.BooleanField(default=False)
     type = models.ForeignKey(ParticipantType,on_delete=models.SET_NULL,null=True)
     bill = models.ImageField(null=True,blank=True,upload_to='participant/{}/'.format(code_registration))
+    address = models.CharField(max_length=200,null=True)
+    company = models.CharField(max_length=200,null=True)
+    # province
+    # city
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

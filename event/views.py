@@ -2,20 +2,44 @@ from django.contrib.auth import login
 from django.shortcuts import render,redirect
 from .models import Event, Participant,Topic
 from django.db.models import Q
-from lamkprs.form import EventForm
+from lamkprs.form import EventForm,ParticipantForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 # Create your views here.
-
+'''
+PARTICIPANT
+'''
 @login_required(login_url='login')
-def participantRecapitulation(request,pk):
-    return render(request,'event/rekapitulasi-peserta.html')
+def addParticipant(request,pk):
+    form = ParticipantForm()
+    if request.method =="POST":
+        form = ParticipantForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('eventlist')
+        else:
+            messages.error(request,form.errors)
+    context = {'form':form}
+    return render(request,'event/add-participant.html',context)
 
+
+@login_required(login_url='/login')
+def viewParticipant(request,pk):
+    # events = request.user.paricipants.all()
+    event = Event.objects.get(id=pk)
+    participants = Participant.objects.filter(user=request.user)
+    context = {'participants':participants,'event':event}
+    return render(request,'event/participant-list.html',context)
+
+'''
+EVENT
+'''
 @login_required(login_url='login')
 def createEvent(request):
     if request.user.is_staff:
+        name = 'Create Event'
         form = EventForm()
         if request.method =="POST":
             form = EventForm(request.POST,request.FILES)
@@ -24,8 +48,8 @@ def createEvent(request):
                 return redirect('eventlist')
             else:
                 messages.error(request,form.errors)
-        context = {'form':form}
-        return render(request,'event/create-event.html',context)
+        context = {'form':form,'name':name}
+        return render(request,'form.html',context)
     else:
         return redirect('eventlist')
 
@@ -76,9 +100,6 @@ def viewProfile(request,pk):
         'event_count':event_count
     }
     return render(request,'event/profile-page.html',context)
-
-
-        
 
 @login_required(login_url='login')
 def deleteEvent(request,pk):

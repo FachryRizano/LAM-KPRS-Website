@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'event.apps.EventConfig',
     'phonenumber_field',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'adminpanel.apps.AdminpanelConfig'
 ]
 
 MIDDLEWARE = [

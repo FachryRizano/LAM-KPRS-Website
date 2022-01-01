@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm 
 from django import forms
-from event.models import Event
+from event.models import Event,Participant,ParticipantType
 from users.models import User
 class EventForm(ModelForm):
     class Meta:
@@ -22,6 +22,16 @@ class EventForm(ModelForm):
                     'type': 'date'
                     }),
         }
+
+class ParticipantForm(ModelForm):
+    class Meta:
+        model = Participant
+        exclude = ['user','event','code_registration','paid','bill','']
+
+class ParticipantTypeForm(ModelForm):
+    class Meta:
+        model = ParticipantType
+        fields = "__all__"
 
 
 class UserForm(UserCreationForm):
