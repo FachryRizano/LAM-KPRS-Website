@@ -57,6 +57,7 @@ def orderEvent(request,pk):
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
+    name = 'Register'
     form = UserForm()
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -67,5 +68,5 @@ def register(request):
             return redirect('home')
         else:
             messages.error(request,form.errors)
-    context = {'form':form}
-    return render(request,'login_register.html',context)
+    context = {'form':form,'name':name}
+    return render(request,'form.html',context)

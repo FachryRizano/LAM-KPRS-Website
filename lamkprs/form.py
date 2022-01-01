@@ -31,7 +31,7 @@ class ParticipantForm(ModelForm):
 class ParticipantTypeForm(ModelForm):
     class Meta:
         model = ParticipantType
-        fields = "__all__"
+        fields = ['category_name']
 
 
 class UserForm(UserCreationForm):

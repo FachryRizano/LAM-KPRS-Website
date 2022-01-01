@@ -1,6 +1,7 @@
 {%extends 'main.html'%}
 {%load static%}
 {%block content%}
+<a href>Add Event</a>
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -20,7 +21,7 @@
                 <td>{{event.name}}</td>
                 <td><img src="{%static event.event_pict.url%}"></img></td>
                 <td>
-                    <a class="btn btn-warning btn-sm btn-block mb-2" href="">
+                    <a class="btn btn-warning btn-sm btn-block mb-2" href="{%url 'add-participant-type' event.id %}">
                         <i class="fas fa-plus-circle"></i>&nbsp; Tipe Peserta
                     </a>
                     <a class="btn btn-primary btn-sm btn-block mb-2" href="">

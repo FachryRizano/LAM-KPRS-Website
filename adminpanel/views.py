@@ -18,7 +18,12 @@ def allEvent(request):
     return render(request,'adminpanel/event.html',context)
 
 @user_passes_test(is_staff)
-def addParticipantType(request):
+def addParticipantType(request,pk):
+    name = 'Add Participant Type'
+    event =  Event.objects.get(id=pk)
     form = ParticipantTypeForm()
-    context = {'form':form}
+    # if request.method == 'POST':
+
+    context = {'form':form,'name':name}
     return render(request,'form.html',context)
+
