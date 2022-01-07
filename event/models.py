@@ -35,8 +35,8 @@ class Event(models.Model):
 
 class CPD(models.Model):
     name = models.CharField(max_length=200)
-    # workshop_type = models.
-    # register_type= 
+    user = models.ForeignKey(User,on_delete=models.CASCADE,)
+    event = models.ForeignKey(Event,on_delete=models.CASCADE,)
     quota = models.IntegerField()
     start = models.DateField()
     end = models.DateField()
@@ -45,17 +45,22 @@ class CPD(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
 class ParticipantType(models.Model):
-    event = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    category_name = models.CharField(max_length=200)
+    event = models.ForeignKey(Event,on_delete=models.CASCADE)
+    category_name = models.CharField(max_length=200,unique=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.category_name + ' ' + self.event.name
 class Participant(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     event = models.ForeignKey(Event,on_delete=models.CASCADE)
     # Generator
-    code_registration = models.CharField(max_length=100,null=True,blank=True)
+    code_registration = models.CharField(max_length=100)
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     phone = PhoneNumberField(null=False,blank=False,unique=True)

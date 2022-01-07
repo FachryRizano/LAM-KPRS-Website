@@ -1,55 +1,49 @@
-{%extends 'main.html'%}
+{%extends 'adminpanel/table.html'%}
 {%load static%}
-{%block content%}
-<a href>Add Event</a>
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama Kegiatan</th>
-                <th scope="col">Image Acara</th>
-                <th scope="col">Pengaturan</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {%for event in events%}
-            <tr role="row">
-                <td>{{forloop.counter}}</td>
-                <td>{{event.name}}</td>
-                <td><img src="{%static event.event_pict.url%}"></img></td>
-                <td>
-                    <a class="btn btn-warning btn-sm btn-block mb-2" href="{%url 'add-participant-type' event.id %}">
-                        <i class="fas fa-plus-circle"></i>&nbsp; Tipe Peserta
-                    </a>
-                    <a class="btn btn-primary btn-sm btn-block mb-2" href="">
-                        <i class="fas fa-plus-circle"></i>&nbsp; CPD &amp; WORKSHOP
-                    </a>
-                    <a class="btn btn-success btn-sm btn-block mb-2" href="">
-                        <i class="fas fa-plus-circle"></i>&nbsp; Simposium
-                    </a>
-                    <a class="btn btn-danger btn-sm btn-block mb-2" href="">
-                        <i class="fas fa-plus-circle"></i>&nbsp; Hotel
-                    </a>
-                    <br>
-                    <a class="btn btn-dark btn-sm btn-block mb-2" href="">
-                        <i class="fas fa-plus-circle"></i>&nbsp; REKAP PESAN HOTEL
-                    </a>
-                </td>
-                <td>{{event.status}}</td>
-                <td>
-                    <a class="btn btn-flat" href="">
-                        <i class="far fa-edit" style="color: #2196f3;"></i>
-                    </a>
-                    <a class="btn btn-flat tbl_link" title="Delete Event" data-id="4" id="DeleteEvent">
-                        <i class="far fa-trash-alt" style="color:#fa6801"></i>
-                    </a>
-                </td>
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
-</div>
-{%endblock content%}
+{%block button%}
+<a href="{%url 'create-event' %}">Add Event</a>
+{%endblock button%}
+{%block head%}
+<th scope="col">No</th>
+<th scope="col">Nama Kegiatan</th>
+<th scope="col">Image Acara</th>
+<th scope="col">Pengaturan</th>
+<th scope="col">Status</th>
+<th scope="col">Action</th>
+{%endblock head%}
+{%block rows%}
+{%for event in events%}
+<tr role="row">
+    <td>{{forloop.counter}}</td>
+    <td>{{event.name}}</td>
+    <td><img src="{%static event.event_pict.url%}"></img></td>
+    <td>
+        <a class="btn btn-warning btn-sm btn-block mb-2" href="{%url 'participant-type' event.id %}">
+            <i class="fas fa-plus-circle"></i>&nbsp; Tipe Peserta
+        </a>
+        <a class="btn btn-primary btn-sm btn-block mb-2" href="{%url 'cpd' event.id%}">
+            <i class="fas fa-plus-circle"></i>&nbsp; CPD &amp; WORKSHOP
+        </a>
+        <a class="btn btn-success btn-sm btn-block mb-2" href="">
+            <i class="fas fa-plus-circle"></i>&nbsp; Simposium
+        </a>
+        <a class="btn btn-danger btn-sm btn-block mb-2" href="">
+            <i class="fas fa-plus-circle"></i>&nbsp; Hotel
+        </a>
+        <br>
+        <a class="btn btn-dark btn-sm btn-block mb-2" href="">
+            <i class="fas fa-plus-circle"></i>&nbsp; REKAP PESAN HOTEL
+        </a>
+    </td>
+    <td>{{event.status}}</td>
+    <td>
+        <a class="btn btn-flat" href="">
+            <i class="far fa-edit" style="color: #2196f3;"></i>
+        </a>
+        <a class="btn btn-flat tbl_link" title="Delete Event" data-id="4" id="DeleteEvent">
+            <i class="far fa-trash-alt" style="color:#fa6801"></i>
+        </a>
+    </td>
+</tr>
+{%endfor%}
+{%endblock rows%}

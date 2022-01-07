@@ -1,0 +1,18 @@
+{%extends 'main.html'%}
+{%load static%}
+{%block content%}
+{%block button%}
+{%endblock button%}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            {%block head%}
+            {%endblock head%}
+        </thead>
+        <tbody>
+            {%block rows%}
+            {%endblock rows%}
+        </tbody>
+    </table>
+</div>
+{%endblock content%}

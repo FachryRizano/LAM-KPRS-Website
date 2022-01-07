@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm 
 from django import forms
-from event.models import Event,Participant,ParticipantType
+from event.models import Event,Participant,ParticipantType, CPD
 from users.models import User
 class EventForm(ModelForm):
     class Meta:
@@ -33,6 +33,24 @@ class ParticipantTypeForm(ModelForm):
         model = ParticipantType
         fields = ['category_name']
 
+class CPDForm(ModelForm):
+    class Meta:
+        model = CPD
+        exclude = ['event','user']
+        widgets = {
+            'start': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control', 
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                    }),
+            'end': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control', 
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                    }),
+        }
 
 class UserForm(UserCreationForm):
     class Meta:
