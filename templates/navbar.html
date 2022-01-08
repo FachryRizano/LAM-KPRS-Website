@@ -1,20 +1,22 @@
 <a href="/">
     <h1>LOGO</h1>
 </a>
-
-<form method="GET" action="{% url 'eventlist' %}">
-    <input type="text" name="q" placeholder="Search room...."/>
-</form>
-{%if request.user.is_authenticated%}
-<p>Hello {{request.user.name}}</p>
-<a href="{% url 'logout' %}">Logout</a>
-<a href="{% url 'eventlist' %}">Event</a>
-<a href="">Order</a>
-{%if request.user.is_staff%}
-<a href="{% url 'dashboard' %}">Admin Panel</a>
-{%endif%}
-{%else%}
-<a href="{% url 'login' %}">Login</a>
-<a href="{% url 'register' %}">Register</a>
-{%endif%}
-<hr>
+<nav class="nav">
+    <form method="GET" action="{% url 'eventlist' %}">
+        <input type="text" name="q" placeholder="Search room...."/>
+    </form>
+    {%if request.user.is_authenticated%}
+    <p>Hello {{request.user.name}}</p>
+    <br>
+    <a class ="nav-link" href="{% url 'logout' %}">Logout</a>
+    <a class = "nav-link" href="{% url 'eventlist' %}">Event</a>
+    {%if request.user.is_staff%}
+    <a class = "nav-link" href="{% url 'dashboard' %}">Admin Panel</a>
+    <a class = "nav-link" href="">Order</a>
+    {%endif%}
+    {%else%}
+    <a class = "nav-link" href="{% url 'login' %}">Login</a>
+    <a class = "nav-link" href="{% url 'register' %}">Register</a>
+    {%endif%}
+    <hr>
+</nav>

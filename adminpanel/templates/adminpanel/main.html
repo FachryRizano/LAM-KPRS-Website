@@ -24,13 +24,13 @@
       Tip 2: you can also add an image using data-image tag
   -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="{%url 'home'%}" class="simple-text logo-normal">
           LAM-KPRS
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="{%url 'dashboard' %}">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
@@ -38,8 +38,20 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'event'%}">
-              <i class="material-icons">dashboard</i>
+              <i class="material-icons">event</i>
               <p>Event</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'event'%}">
+              <i class="material-icons">people</i>
+              <p>Member</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'event'%}">
+              <i class="material-icons">groups</i>
+              <p>Groups</p>
             </a>
           </li>
           <!-- your sidebar here -->
